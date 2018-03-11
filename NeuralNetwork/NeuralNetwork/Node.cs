@@ -8,20 +8,14 @@ namespace NeuralNetwork
 {
     public class Node
     {
-        public double Weight;
+        private double Bias;
         public double Value;
 
         public SynapseCollection Inputs;
-        public SynapseCollection Outputs;
-
-        public Node(float weight)
-        {
-            this.Weight = weight;
-        }
 
         public void Update()
         {
-            Value = Inputs.GetAverage();
+            Value = Inputs.ForwardPropagation(Bias);
         }
     }
 }

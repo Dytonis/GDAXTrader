@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetwork", "NeuralNetwork\NeuralNetwork.csproj", "{916415F6-2653-42F6-8524-06A04A6BB1D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer", "NetworkVisualizer\Visualizer.csproj", "{DF886236-17FD-4A51-A5A5-B5AAC3551C11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "GDAX\Services.csproj", "{22C8B2CC-AA51-41F3-A8F5-6A96BC4B7F65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trader", "Trader\Trader.csproj", "{DFB4368B-63AE-46DE-8B35-CBE98632FFB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{916415F6-2653-42F6-8524-06A04A6BB1D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{916415F6-2653-42F6-8524-06A04A6BB1D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{916415F6-2653-42F6-8524-06A04A6BB1D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{916415F6-2653-42F6-8524-06A04A6BB1D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF886236-17FD-4A51-A5A5-B5AAC3551C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF886236-17FD-4A51-A5A5-B5AAC3551C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF886236-17FD-4A51-A5A5-B5AAC3551C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF886236-17FD-4A51-A5A5-B5AAC3551C11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C8B2CC-AA51-41F3-A8F5-6A96BC4B7F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C8B2CC-AA51-41F3-A8F5-6A96BC4B7F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C8B2CC-AA51-41F3-A8F5-6A96BC4B7F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C8B2CC-AA51-41F3-A8F5-6A96BC4B7F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFB4368B-63AE-46DE-8B35-CBE98632FFB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFB4368B-63AE-46DE-8B35-CBE98632FFB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFB4368B-63AE-46DE-8B35-CBE98632FFB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFB4368B-63AE-46DE-8B35-CBE98632FFB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

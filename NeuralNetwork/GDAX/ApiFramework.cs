@@ -9,7 +9,5 @@ namespace GDAX
     public class ApiFramework
     {
         public const string Base = @"https://api.gdax.com";
-
-
     }
 }

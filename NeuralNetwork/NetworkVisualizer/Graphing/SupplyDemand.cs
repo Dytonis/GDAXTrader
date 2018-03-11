@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeuralNetwork
+namespace NetworkVisualizer.Graphing
 {
-    public class Synapse
+    class SupplyDemand
     {
-        public Node Input;
-
-        public double Weight;
     }
 }

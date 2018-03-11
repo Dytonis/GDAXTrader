@@ -9,7 +9,6 @@ namespace NeuralNetwork
 {
     public class SynapseCollection : IEnumerable, IDisposable
     {
-        private int index;
         private Synapse[] list;
 
         public void Dispose()
@@ -22,16 +21,19 @@ namespace NeuralNetwork
             yield return list.GetEnumerator();
         }
 
-        public double GetAverage()
+        public double ForwardPropagation(double Bias)
         {
-            double adding = 0;
+            List<double> items = new List<double>();
 
             foreach(Synapse s in list)
             {
-                adding += s.Value;
+                items.Add(s.Weight * s.Input.Value);
             }
 
-            return adding / (double)list.Length;
+            items.Add(Bias);
+
+            double sum = items.Sum();
+            return Math.Sigmoid(sum);
         }
     }
 }

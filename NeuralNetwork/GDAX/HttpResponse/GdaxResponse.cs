@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeuralNetwork
+namespace GDAX.HttpResponse
 {
-    public class Synapse
+    public class GdaxResponse
     {
-        public Node Input;
-
-        public double Weight;
+        public string message { get; set; }
     }
 }
