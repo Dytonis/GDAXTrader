@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Graphing\GraphContext.cs" />
     <Compile Include="Graphing\Grapher.cs" />
     <Compile Include="Graphing\SupplyDemand.cs" />
     <Compile Include="MainForm.cs">
@@ -54,8 +55,10 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Mathn.cs" />
+    <Compile Include="OrderBook.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategy.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +88,10 @@
     <ProjectReference Include="..\GDAX\Services.csproj">
       <Project>{22c8b2cc-aa51-41f3-a8f5-6a96bc4b7f65}</Project>
       <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trader\Trader.csproj">
+      <Project>{dfb4368b-63ae-46de-8b35-cbe98632ffb2}</Project>
+      <Name>Trader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,8 +12,7 @@ namespace NetworkVisualizer.Graphing
     {
         private Graphics g;
 
-        string[][] bids;
-        string[][] asks;
+        OrderBook book;
         decimal lowValueRange;
         decimal highValueRange;
         decimal lowCountRange;
@@ -45,21 +44,20 @@ namespace NetworkVisualizer.Graphing
             buffer.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
         }
 
-        public void SetData(string[][] bids, string[][] asks, decimal percentZoomValue, decimal percentCutoffCount)
+        public void SetData(OrderBook book, decimal percentZoomValue, decimal percentCutoffCount)
         {
-            if (bids.Length <= 0 || asks.Length <= 0)
+            if (book.Bids.Count <= 0 || book.Asks.Count <= 0)
                 return;
 
-            this.bids = bids;
-            this.asks = asks;
+            this.book = book;
 
             try
             {
-                lowValueRange = this.bids.Min((string[] x) => decimal.Parse(x[0]));
-                highValueRange = this.bids.Max((string[] x) => decimal.Parse(x[0]));
+                lowValueRange = book.Bids.Min(x => x[0]);
+                highValueRange = book.Bids.Max(x => x[0]);
 
-                lowCountRange = this.bids.Min((string[] x) => decimal.Parse(x[1]));
-                highCountRange = this.bids.Max((string[] x) => decimal.Parse(x[1]));
+                lowCountRange = book.Bids.Min(x => x[1]);
+                highCountRange = book.Bids.Max(x => x[1]);
 
                 highCountRange *= percentCutoffCount;
 
@@ -77,43 +75,74 @@ namespace NetworkVisualizer.Graphing
             }
         }
 
-        public void DrawSnapshot()
+        public void DrawDot(decimal Value, decimal Count)
         {
-            if (bids == null || asks == null)
+            DrawActions.Add(new Action(() => buffer.Graphics.DrawEllipse(Pens.Yellow, new Rectangle(ValueToX(Value) - 2, CountToY(Count) - 2, 4, 4))));
+        }
+
+        private List<Action> DrawActions = new List<Action>();
+
+        public void Draw()
+        {
+            if (book == null)
                 return;
-            if (bids.Length <= 0 || asks.Length <= 0)
+            if (book.Bids == null || book.Asks == null)
+                return;
+            if (book.Bids.Count <= 0 || book.Asks.Count <= 0)
                 return;
 
             buffer.Graphics.Clear(Color.FromArgb(255, 64, 64, 64));
+
+            for(int i = 0; i < DrawActions.Count; i++)
+            {
+                DrawActions[i]();
+            }
 
             DrawXLabels(15, bottomMargin, leftMargin);
             DrawYLabels(5, leftMargin, bottomMargin);
 
             decimal count = 0;
 
-            for (int i = 0; i < bids.Length; i += 1)
+            for (int i = 0; i < book.Bids.Count; i += 1)
             {
-                decimal value = decimal.Parse(bids[i][0]);
-                count += decimal.Parse(bids[i][1]);
-                decimal count2 = count + decimal.Parse(bids[i + 1][1]);
-                decimal value2 = decimal.Parse(bids[i + 1][0]);
+                decimal value = book.Bids[i][0];
+                count += book.Bids[i][1];
+                decimal count2 = count + book.Bids[i + 1][1];
+                decimal value2 = book.Bids[i + 1][0];
 
                 if(DrawPair(value, count, value2, count2) == false) break;
             } 
 
             count = 0;
 
-            for(int i = 0; i < asks.Length; i+= 1)
+            for(int i = 0; i < book.Bids.Count; i+= 1)
             {
-                decimal value = decimal.Parse(asks[i][0]);
-                count += decimal.Parse(asks[i][1]);
-                decimal count2 = count + decimal.Parse(asks[i + 1][1]);
-                decimal value2 = decimal.Parse(asks[i + 1][0]);
+                decimal value = book.Asks[i][0];
+                count += book.Asks[i][1];
+                decimal count2 = count + book.Asks[i + 1][1];
+                decimal value2 = book.Asks[i + 1][0];
 
                 if(DrawPair(value, count, value2, count2) == false) break;
             }
 
             buffer.Render(g);
+            //DrawActions.Clear();
+        }
+
+        private int ValueToX(decimal value)
+        {
+            if (highValueRange == 0)
+                return 0;
+
+            return (int)Mathm.Map(value, lowValueRange, highValueRange, leftMargin, width - rightMargin);
+        }
+
+        private int CountToY(decimal count)
+        {
+            if (highCountRange == 0)
+                return 0;
+
+            return (int)Mathm.Map(count, lowCountRange, highCountRange, bottomMargin, height - 20);
         }
 
         private bool DrawPair(decimal value, decimal count, decimal value2, decimal count2)
